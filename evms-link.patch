@@ -1,0 +1,11 @@
+--- evms-2.1.1/make.rules.in.orig	Tue Aug 12 18:14:10 2003
++++ evms-2.1.1/make.rules.in	Thu Oct  9 17:11:02 2003
+@@ -111,7 +111,7 @@
+ BUILD_SHARED_LIB = $(CC) -shared $(EVMS_LDFLAGS) -Wl,-soname,$(SONAME) -o $(TARGET) $(OBJECTS) $(EVMS_LIBS)
+ BUILD_STATIC_LIB = $(AR) rcs $(ARNAME) $(OBJECTS)
+ BUILD_PLUGIN = $(CC) -shared $(EVMS_LDFLAGS) -o $(TARGET) $(OBJECTS) $(EVMS_LIBS)
+-BUILD_SBIN = $(CC) -L$(top_srcdir)/engine $(EVMS_LDFLAGS) $(EVMS_LIBS) $(PTHREAD_LIBS) $(EFENCE_LIBS) -levms -o $(TARGET) $(OBJECTS)
++BUILD_SBIN = $(CC) -L$(top_srcdir)/engine $(EVMS_LDFLAGS) $(EVMS_LIBS) $(PTHREAD_LIBS) $(EFENCE_LIBS) -levms -L$(top_srcdir)/lib/dlist -ldlist -o $(TARGET) $(OBJECTS)
+ 
+ .PHONY: install uninstall clean distclean
+ .SUFFIXES: .c .o
