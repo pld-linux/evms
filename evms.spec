@@ -1,7 +1,7 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	1.1.0
+Version:	1.2.0
 Release:	1
 License:	GPL
 Group:		Applications/System
