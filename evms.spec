@@ -106,8 +106,6 @@ install -d $RPM_BUILD_ROOT%{_prefix}/X11R6/%{_sbindir}
 
 mv $RPM_BUILD_ROOT%{_sbindir}/evmsgui $RPM_BUILD_ROOT%{_prefix}/X11R6/%{_sbindir}
 
-gzip -9nf CHANGES *.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -116,7 +114,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc CHANGES *.txt
 %attr(755,root,root) %{_sbindir}/evms
 %attr(755,root,root) %{_sbindir}/evms_*
 %dir %{_libdir}/evms
