@@ -50,18 +50,18 @@ Header files for EVMS.
 Pliki nag³ówkowe dla EVMS.
 
 %package static
-Summary:	Static EVMS libraries
+Summary:	Static EVMS library
 Summary(es):	Biblioteca estática usada no desenvolvimento de aplicativos com EVMS
-Summary(pl):	Statyczne biblioteki EVMS
+Summary(pl):	Statyczna biblioteka EVMS
 Summary(pt_BR):	Biblioteca estática de desenvolvimento
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static EVMS libraries.
+Static EVMS library.
 
 %description static -l pl
-Statyczne biblioteki EVMS.
+Statyczna biblioteka EVMS.
 
 %package ncurses
 Summary:	Ncurses interface for EVMS
@@ -89,14 +89,11 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 
 %prep
 %setup -q
-#%patch -p1
+%patch0 -p1
 
 %build
 %{__autoconf}
-%configure \
-	--with-plugins=all \
-	--with-interfaces=all \
-	--with-kernel=%{_kernelsrcdir}
+%configure
 
 %{__make} \
 	OPT="%{rpmcflags}"
@@ -121,22 +118,22 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog INSTALL* PLUGIN* TERMINOLOGY
 %config(noreplace) %verify(not size mtime md5) /etc/evms.conf
 %attr(755,root,root) %{_sbindir}/evms*
-%attr(755,root,root) %{_sbindir}/get*
+%exclude %{_sbindir}/evmsn
+%exclude %{_sbindir}/evmsgui
 %dir %{_libdir}/evms
-%attr(755,root,root) %{_libdir}/evms/*.so
-%attr(755,root,root) %{_libdir}/libdlist-*.so.*
+%dir %{_libdir}/evms/%{version}
+%attr(755,root,root) %{_libdir}/evms/%{version}/*.so
 %attr(755,root,root) %{_libdir}/libevms-*.so.*
 %{_mandir}/man8/*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libdlist.so
 %attr(755,root,root) %{_libdir}/libevms.so
 %{_includedir}/evms
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libevms.a
 
 %files ncurses
 %defattr(644,root,root,755)
