@@ -1,17 +1,18 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	1.2.0
-Release:	1
-License:	GPL
+Version:	1.9.0
+Release:	0.1
+License:	GPL v2
 Group:		Applications/System
-Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/evms/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 URL:		http://www.sourceforge.net/projects/evms/
+BuildRequires:	autoconf
+BuildRequires:	e2fsprogs-devel
+BuildRequires:	glibc-static
 BuildRequires:	glib-devel >= 1.2.0
 BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	ncurses-devel
-BuildRequires:	autoconf
-BuildRequires:	glibc-static
 Conflicts:	kernel < 2.4.19
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -88,7 +89,6 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 %setup -q
 
 %build
-cd engine
 %{__autoconf}
 %configure \
 	--with-plugins=all \
@@ -99,12 +99,12 @@ cd engine
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_prefix}/X11R6/%{_sbindir}
+install -d $RPM_BUILD_ROOT/etc
 
-%{__make} -C engine install \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT%{_sbindir}/evmsgui $RPM_BUILD_ROOT%{_prefix}/X11R6/%{_sbindir}
+install doc/evms.conf $RPM_BUILD_ROOT/etc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -114,9 +114,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES *.txt
-%attr(755,root,root) %{_sbindir}/evms
-%attr(755,root,root) %{_sbindir}/evms_*
+%doc ChangeLog INSTALL.HA PLUGIN.IDS TERMINOLOGY
+%config(noreplace) %verify(not size mtime md5) /etc/evms.conf
+%attr(755,root,root) %{_sbindir}/evms*
 %dir %{_libdir}/evms
 %attr(755,root,root) %{_libdir}/evms/*.so
 %attr(755,root,root) %{_libdir}%{_libdir}dlist-*.so
@@ -139,4 +139,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files X11
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_prefix}/X11R6/%{_sbindir}/evmsgui
+%attr(755,root,root) %{_sbindir}/evmsgui
