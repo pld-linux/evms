@@ -14,7 +14,7 @@ BuildRequires:	glib-devel >= 1.2.0
 BuildRequires:	glibc-static
 BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	libuuid-devel
-BuildRequires:	ncurses-devel
+BuildRequires:	ncurses-ext-devel
 Conflicts:	kernel < 2.4.19
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
