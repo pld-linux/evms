@@ -1,0 +1,21 @@
+diff -urN evms-0.9.2.org/engine/make.rules.in evms-0.9.2/engine/make.rules.in
+--- evms-0.9.2.org/engine/make.rules.in	Sun Mar 17 20:57:25 2002
++++ evms-0.9.2/engine/make.rules.in	Sun Mar 17 21:01:03 2002
+@@ -24,7 +24,7 @@
+ CPP		= @CPP@
+ CC	  	= @CC@
+ LIBDIRS		= -L$(HOMEDIR)/Engine -L$(HOMEDIR)/dlist
+-INCLUDES	= -I$(HOMEDIR)/include -I$(HOMEDIR)/dlist -I$(KERNELDIR)/include -I/usr/include -I/usr/local/include
++INCLUDES	= -I$(HOMEDIR)/include -I$(HOMEDIR)/dlist -I$(KERNELDIR)/include -I/usr/include/ncurses
+ DEFINES		= @evmsdefs@ -DMAJOR_VERSION=$(MAJOR_VERSION) -DMINOR_VERSION=$(MINOR_VERSION) -DPATCH_LEVEL=$(PATCH_LEVEL) -DVERSION=\"$(VERSION)\" -DDATE=\"$(date)\"
+ 
+ GTK_LIBS	= @gtklibs@
+@@ -32,7 +32,7 @@
+ ENGINE_DEBUG	= @debug@
+ EFENCE		= @efence@
+ 
+-EVMSCFLAGS	= -Wall -fPIC -O2 $(ENGINE_DEBUG) $(INCLUDES) $(DEFINES)
++EVMSCFLAGS	= -Wall -fPIC $(OPT) $(ENGINE_DEBUG) $(INCLUDES) $(DEFINES)
+ SO_CFLAGS       = -shared $(EFENCE) -lc -ldl -L$(HOMEDIR)/dlist -ldlist
+ 
+ .c.o:
