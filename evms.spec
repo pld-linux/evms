@@ -12,6 +12,7 @@ BuildRequires:	glib-devel >= 1.2.0
 BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	ncurses-devel
 BuildRequires:	autoconf
+BuildRequires:	glibc-static
 Conflicts:	kernel < 2.4.0
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
