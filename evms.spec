@@ -2,7 +2,7 @@ Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
 Version:	0.9.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/evms/%{name}-%{version}.tar.gz
@@ -16,6 +16,7 @@ Conflicts:	kernel < 2.4.0
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
+%define		_libdir		/lib
 
 %description
 This package contains the user-space tools needed to manage EVMS
@@ -62,7 +63,7 @@ Statyczne biblioteki EVMS.
 %package ncurses
 Summary:	Ncurses interface for EVMS
 Summary(pl):	Interfejs u¿ytkownika w ncurses dla EVMS
-Group:		Development/Libraries
+Group:		Applications/System
 Requires:	%{name} = %{version}
 
 %description ncurses
@@ -74,7 +75,7 @@ Graficzny interfejs u¿ytkownika w ncurses dla EVMS.
 %package X11
 Summary:	GUI interface for EVMS
 Summary(pl):	Graficzny interfejs u¿ytkownika dla EVMS
-Group:		Development/Libraries
+Group:		X11/Applications
 Requires:	%{name} = %{version}
 
 %description X11
@@ -90,10 +91,11 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 %build
 cd engine
 autoconf
-CPPFLAGS="-I%{_includedir}/ncurses"; export CPPFLAGS
 %configure \
 	--with-plugins=all \
-	--with-interfaces=all
+	--with-interfaces=all \
+	--with-evmslib_dir=%{_libdir}
+
 %{__make} OPT="%{rpmcflags}"
 
 %install
@@ -101,10 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_prefix}/X11R6/%{_sbindir}
 
 %{__make} -C engine install \
-	prefix="$RPM_BUILD_ROOT%{_prefix}" \
-	exec_prefix="$RPM_BUILD_ROOT%{_prefix}" \
-	sbindir="$RPM_BUILD_ROOT%{_sbindir}" \
-	mandir="$RPM_BUILD_ROOT%{_mandir}"
+	DESTDIR=$RPM_BUILD_ROOT
 
 mv $RPM_BUILD_ROOT%{_sbindir}/evmsgui $RPM_BUILD_ROOT%{_prefix}/X11R6/%{_sbindir}
 
@@ -123,19 +122,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/evms_*
 %dir %{_libdir}/evms
 %attr(755,root,root) %{_libdir}/evms/*.so
-%attr(755,root,root) %{_libdir}/libdlist-*.so
-%attr(755,root,root) %{_libdir}/libevms-*.so
+%attr(755,root,root) %{_libdir}%{_libdir}dlist-*.so
+%attr(755,root,root) %{_libdir}%{_libdir}evms-*.so
 %{_mandir}/man8/*
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/evms
-%attr(755,root,root) %{_libdir}/libdlist.so
-%attr(755,root,root) %{_libdir}/libevms.so
+%attr(755,root,root) %{_libdir}%{_libdir}dlist.so
+%attr(755,root,root) %{_libdir}%{_libdir}evms.so
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}%{_libdir}*.a
 
 %files ncurses
 %defattr(644,root,root,755)
