@@ -1,54 +1,114 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	0.9.0
+Version:	0.9.2
 Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/evms/%{name}-%{version}.tar.gz
+Patch0:		%{name}-make.patch
 URL:		http://www.sourceforge.net/projects/evms/
+BuildRequires:	glib-devel >= 1.2.0
+BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	ncurses-devel
+BuildRequires:	autoconf
+Conflicts:	kernel < 2.4.0
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_sbindir	/sbin
 
 %description
 This package contains the user-space tools needed to manage EVMS
 (Enterprise Volume Management System) volumes.
 
 In order to use these user-space tools, you must also have your kernel
-patched with the most recent EVMS code. This code is available in the
-source package on the project web page
-http://www.sf.net/projects/evms/ .
-
-Please see the EVMS-HOWTO on the project web page or in the source
-package for detailed instructions on patching your kernel with EVMS
-and using the tools after installation.
+patched with the most recent EVMS code.
 
 %description -l pl
 Ten pakiet zawiera narzêdzia potrzebne do zarz±dzania wolumenami
 dyskowymi EVMS (Enterprise Volume Management System).
 
 Aby u¿ywaæ tych narzêdzi, musisz mieæ j±dro z odpowiednio now± ³at±
-EVMS. Ten kod jest dostêpny na stronie projektu
-http://www.sf.net/projects/evms/ .
+EVMS.
 
-Dok³adny opis ³atania j±dra i u¿ywania narzêdzi znajduje siê w
-ECMS-HOWTO na stronie projektu lub w pakiecie ¼ród³owym.
+%package devel
+Summary:	Header files and develpment documentation for EVMS
+Summary(es):	Arquivos de cabeçalho e bibliotecas de desenvolvimento para EVMS
+Summary(pl):	Pliki nag³ówkowe i dokumetacja do EVMS
+Summary(pt_BR):	Bibliotecas e arquivos de inclusão para a EVMS
+Group:		Development/Libraries
+Requires:	%{name} = %{version}
+
+%description devel
+Header files and develpment documentation for EVMS.
+
+%description devel -l pl
+Pliki nag³ówkowe oraz biblioteki developerskie EVMS.
+
+%package static
+Summary:	Static EVMS libraries
+Summary(es):	Biblioteca estática usada no desenvolvimento de aplicativos com EVMS
+Summary(pl):	Biblioteka statyczna EVMS
+Summary(pt_BR):	Biblioteca estática de desenvolvimento
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}
+
+%description static
+Static EVMS libraries.
+
+%description static -l pl
+Statyczne biblioteki EVMS.
+
+%package ncurses
+Summary:	Ncurses interface for EVMS
+Summary(pl):	Interfejs u¿ytkownika w ncurses dla EVMS
+Group:		Development/Libraries
+Requires:	%{name} = %{version}
+
+%description ncurses
+Ncurses interface for EVMS.
+
+%description ncurses -l pl
+Graficzny interfejs u¿ytkownika w ncurses dla EVMS.
+
+%package X11
+Summary:	GUI interface for EVMS
+Summary(pl):	Graficzny interfejs u¿ytkownika dla EVMS
+Group:		Development/Libraries
+Requires:	%{name} = %{version}
+
+%description X11
+GUI interface for EVMS.
+
+%description X11 -l pl
+Graficzny interfejs u¿ytkownika dla EVMS.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 cd engine
 autoconf
-%configure
-
-%{__make}
+CPPFLAGS="-I%{_includedir}/ncurses"; export CPPFLAGS
+%configure \
+	--with-plugins=all \
+	--with-interfaces=all
+%{__make} OPT="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd engine
-%{__make} install \
+install -d $RPM_BUILD_ROOT%{_prefix}/X11R6/%{_sbindir}
+
+%{__make} -C engine install \
 	prefix="$RPM_BUILD_ROOT%{_prefix}" \
-	exec_prefix="$RPM_BUILD_ROOT%{_prefix}"
+	exec_prefix="$RPM_BUILD_ROOT%{_prefix}" \
+	sbindir="$RPM_BUILD_ROOT%{_sbindir}" \
+	mandir="$RPM_BUILD_ROOT%{_mandir}"
+
+mv $RPM_BUILD_ROOT%{_sbindir}/evmsgui $RPM_BUILD_ROOT%{_prefix}/X11R6/%{_sbindir}
+
+gzip -9nf CHANGES *.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -58,46 +118,29 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libdlist.so.1.0
-%attr(755,root,root) %{_libdir}/libevms-0.9.0.so
-%dir %{_libdir}/evms
-%attr(755,root,root) %{_libdir}/evms/libaixregmgr.0.1.0.so
-%attr(755,root,root) %{_libdir}/evms/libbbr.1.0.0.so
-%attr(755,root,root) %{_libdir}/evms/libdefsegmgr.1.0.0.so
-%attr(755,root,root) %{_libdir}/evms/libdrivelink.1.0.0.so
-%attr(755,root,root) %{_libdir}/evms/liblocaldskmgr.1.0.0.so
-%attr(755,root,root) %{_libdir}/evms/liblvmregmgr.0.8.0.so
-%attr(755,root,root) %{_libdir}/evms/libmdregmgr.0.1.0.so
-%attr(755,root,root) %{_libdir}/evms/libos2regmgr.1.0.0.so
-%attr(755,root,root) %{_libdir}/evms/libsnapshot.2.0.0.so
+%doc *.gz
 %attr(755,root,root) %{_sbindir}/evms
-%attr(755,root,root) %{_sbindir}/evmsgui
+%attr(755,root,root) %{_sbindir}/evms_*
+%dir %{_libdir}/evms
+%attr(755,root,root) %{_libdir}/evms/*.so
+%attr(755,root,root) %{_libdir}/libdlist-*.so
+%attr(755,root,root) %{_libdir}/libevms-*.so
+%{_mandir}/man8/*
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/evms
+%attr(755,root,root) %{_libdir}/libdlist.so
+%attr(755,root,root) %{_libdir}/libevms.so
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
+
+%files ncurses
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/evmsn
-%attr(755,root,root) %{_sbindir}/evms_devnode_fixup
-%attr(755,root,root) %{_sbindir}/evms_rediscover
-%attr(755,root,root) %{_sbindir}/evms_lvcreate
-%attr(755,root,root) %{_sbindir}/evms_lvdisplay
-%attr(755,root,root) %{_sbindir}/evms_lvextend
-%attr(755,root,root) %{_sbindir}/evms_lvreduce
-%attr(755,root,root) %{_sbindir}/evms_lvremove
-%attr(755,root,root) %{_sbindir}/evms_lvscan
-%attr(755,root,root) %{_sbindir}/evms_pvcreate
-%attr(755,root,root) %{_sbindir}/evms_pvdisplay
-%attr(755,root,root) %{_sbindir}/evms_pvremove
-%attr(755,root,root) %{_sbindir}/evms_pvscan
-%attr(755,root,root) %{_sbindir}/evms_vgcreate
-%attr(755,root,root) %{_sbindir}/evms_vgdisplay
-%attr(755,root,root) %{_sbindir}/evms_vgextend
-%attr(755,root,root) %{_sbindir}/evms_vgreduce
-%attr(755,root,root) %{_sbindir}/evms_vgremove
-%attr(755,root,root) %{_sbindir}/evms_vgscan
-%dir %{_includedir}/evms
-%{_includedir}/evms/appAPI.h
-%{_includedir}/evms/appstructs.h
-%{_includedir}/evms/common.h
-%{_includedir}/evms/enginestructs.h
-%{_includedir}/evms/frontend.h
-%{_includedir}/evms/fullengine.h
-%{_includedir}/evms/options.h
-%{_includedir}/evms/plugfuncs.h
-%{_includedir}/evms/plugin.h
+
+%files X11
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_prefix}/X11R6/%{_sbindir}/evmsgui
