@@ -1,12 +1,11 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	0.9.2
-Release:	2
+Version:	1.0.0
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/evms/%{name}-%{version}.tar.gz
-Patch0:		%{name}-make.patch
 URL:		http://www.sourceforge.net/projects/evms/
 BuildRequires:	glib-devel >= 1.2.0
 BuildRequires:	gtk+-devel >= 1.2.0
@@ -87,7 +86,6 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 cd engine
