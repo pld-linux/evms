@@ -1,12 +1,12 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	2.1.1
+Version:	2.2.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	870d4ccb7e48e82cef3acb8e45fbd54d
+# Source0-md5:	2c856da90bec696daa7f4191a2c5ea94
 Patch0:		%{name}-link.patch
 URL:		http://evms.sourceforge.net/
 BuildRequires:	autoconf
@@ -89,7 +89,7 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 
 %prep
 %setup -q
-%patch -p1
+#%patch -p1
 
 %build
 %{__autoconf}
@@ -118,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog INSTALL.HA PLUGIN.IDS TERMINOLOGY
+%doc ChangeLog INSTALL* PLUGIN* TERMINOLOGY
 %config(noreplace) %verify(not size mtime md5) /etc/evms.conf
 %attr(755,root,root) %{_sbindir}/evms*
 %attr(755,root,root) %{_sbindir}/get*
