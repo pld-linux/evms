@@ -16,7 +16,7 @@ BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	libuuid-devel
 BuildRequires:	ncurses-devel
 Conflicts:	kernel < 2.4.19
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
 %define		_libdir		/lib
