@@ -19,7 +19,7 @@ Conflicts:	kernel < 2.4.19
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
-%define		_libdir		/lib
+%define		_libdir		/%{_lib}
 
 %description
 This package contains the user-space tools needed to manage EVMS
