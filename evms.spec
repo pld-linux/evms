@@ -1,8 +1,8 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	1.9.0
-Release:	0.1
+Version:	2.0.0
+Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
@@ -117,21 +117,22 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog INSTALL.HA PLUGIN.IDS TERMINOLOGY
 %config(noreplace) %verify(not size mtime md5) /etc/evms.conf
 %attr(755,root,root) %{_sbindir}/evms*
+%attr(755,root,root) %{_sbindir}/get*
 %dir %{_libdir}/evms
 %attr(755,root,root) %{_libdir}/evms/*.so
-%attr(755,root,root) %{_libdir}%{_libdir}dlist-*.so
-%attr(755,root,root) %{_libdir}%{_libdir}evms-*.so
+%attr(755,root,root) %{_libdir}/libdlist-*.so.*
+%attr(755,root,root) %{_libdir}/libevms-*.so.*
 %{_mandir}/man8/*
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/evms
-%attr(755,root,root) %{_libdir}%{_libdir}dlist.so
-%attr(755,root,root) %{_libdir}%{_libdir}evms.so
+%attr(755,root,root) %{_libdir}/libdlist.so
+%attr(755,root,root) %{_libdir}/libevms.so
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}%{_libdir}*.a
+%{_libdir}/lib*.a
 
 %files ncurses
 %defattr(644,root,root,755)
