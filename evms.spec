@@ -1,18 +1,19 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	2.1.0
+Version:	2.1.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	fa5b6dcfec8b3b11123d904754037a67
+# Source0-md5:	870d4ccb7e48e82cef3acb8e45fbd54d
+Patch0:		%{name}-link.patch
 URL:		http://evms.sourceforge.net/
 BuildRequires:	autoconf
-BuildRequires:	e2fsprogs-devel
 BuildRequires:	glibc-static
 BuildRequires:	glib-devel >= 1.2.0
 BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	libuuid-devel
 BuildRequires:	ncurses-devel
 Conflicts:	kernel < 2.4.19
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -88,6 +89,7 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 %{__autoconf}
@@ -96,7 +98,8 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 	--with-interfaces=all \
 	--with-kernel=%{_kernelsrcdir}
 
-%{__make} OPT="%{rpmcflags}"
+%{__make} \
+	OPT="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
