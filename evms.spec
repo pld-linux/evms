@@ -5,10 +5,6 @@ Version:	0.9.0
 Release:	1
 License:	GPL
 Group:		Applications/System
-Group(de):	Applikationen/System
-Group(es):	Aplicaciones/Sistema
-Group(pl):	Aplikacje/System
-Group(pt_BR):	Aplicações/Sistema
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/evms/%{name}-%{version}.tar.gz
 URL:		http://www.sourceforge.net/projects/evms/
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
