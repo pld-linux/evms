@@ -6,6 +6,7 @@ Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	34321d87bab4b863f4b5a7c21732643f
 URL:		http://www.sourceforge.net/projects/evms/
 BuildRequires:	autoconf
 BuildRequires:	e2fsprogs-devel
