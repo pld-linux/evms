@@ -1,7 +1,7 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	1.0.1
+Version:	1.1.0
 Release:	1
 License:	GPL
 Group:		Applications/System
@@ -12,7 +12,7 @@ BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	ncurses-devel
 BuildRequires:	autoconf
 BuildRequires:	glibc-static
-Conflicts:	kernel < 2.4.0
+Conflicts:	kernel < 2.4.19
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
@@ -92,7 +92,8 @@ cd engine
 %{__autoconf}
 %configure \
 	--with-plugins=all \
-	--with-interfaces=all
+	--with-interfaces=all \
+	--with-kernel=%{_kernelsrcdir}
 
 %{__make} OPT="%{rpmcflags}"
 
