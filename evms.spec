@@ -89,7 +89,7 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 
 %build
 cd engine
-autoconf
+%{__autoconf}
 %configure \
 	--with-plugins=all \
 	--with-interfaces=all
