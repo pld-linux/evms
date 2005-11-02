@@ -1,18 +1,20 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	2.3.4
-Release:	2
+Version:	2.5.3
+Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/evms/%{name}-%{version}.tar.gz
-# Source0-md5:	41f6ca4963788a2904cdae5b90d3a59b
+# Source0-md5:	702c57921292934bb6c393a2c28c73ba
 Patch0:		%{name}-link.patch
 URL:		http://evms.sourceforge.net/
 BuildRequires:	autoconf
+BuildRequires:	gettext-devel
 BuildRequires:	glib-devel >= 1.2.0
 BuildRequires:	glibc-static
 BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	libtool
 BuildRequires:	libuuid-devel
 BuildRequires:	ncurses-ext-devel
 Conflicts:	kernel < 2.4.19
@@ -92,7 +94,14 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 %patch0 -p1
 
 %build
+mv aclocal.m4 evms.m4
+
+%{__gettextize}
+%{__libtoolize}
+%{__aclocal} -I /usr/share/aclocal/ -I ./ 
 %{__autoconf}
+%{__autoheader}
+
 %configure
 
 %{__make} \
@@ -107,13 +116,15 @@ install -d $RPM_BUILD_ROOT/etc
 
 install doc/evms.conf $RPM_BUILD_ROOT/etc
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc ChangeLog INSTALL* PLUGIN* TERMINOLOGY
 %config(noreplace) %verify(not size mtime md5) /etc/evms.conf
