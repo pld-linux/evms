@@ -98,7 +98,7 @@ mv aclocal.m4 evms.m4
 
 %{__gettextize}
 %{__libtoolize}
-%{__aclocal} -I /usr/share/aclocal/ -I ./ 
+%{__aclocal} -I %{_aclocaldir}/ -I ./
 %{__autoconf}
 %{__autoheader}
 
@@ -109,12 +109,12 @@ mv aclocal.m4 evms.m4
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc
+install -d $RPM_BUILD_ROOT%{_sysconfdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install doc/evms.conf $RPM_BUILD_ROOT/etc
+install doc/evms.conf $RPM_BUILD_ROOT%{_sysconfdir}
 
 %find_lang %{name}
 
@@ -127,7 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc ChangeLog INSTALL* PLUGIN* TERMINOLOGY
-%config(noreplace) %verify(not size mtime md5) /etc/evms.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/evms.conf
 %attr(755,root,root) %{_sbindir}/evms*
 %exclude %{_sbindir}/evmsn
 %exclude %{_sbindir}/evmsgui
