@@ -1,12 +1,12 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	2.5.3
+Version:	2.5.4
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/evms/%{name}-%{version}.tar.gz
-# Source0-md5:	702c57921292934bb6c393a2c28c73ba
+# Source0-md5:	def675ffe19037dcb74f1393530ee4c7
 Patch0:		%{name}-link.patch
 URL:		http://evms.sourceforge.net/
 BuildRequires:	autoconf
