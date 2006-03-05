@@ -1,12 +1,12 @@
 Summary:	Enterprise Volume Management System utilities
 Summary(pl):	Narzêdzia do Enterprise Volume Management System
 Name:		evms
-Version:	2.5.4
+Version:	2.5.5
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/evms/%{name}-%{version}.tar.gz
-# Source0-md5:	def675ffe19037dcb74f1393530ee4c7
+# Source0-md5:	45b463f0cbade194dc0a08be432b572e
 Patch0:		%{name}-link.patch
 URL:		http://evms.sourceforge.net/
 BuildRequires:	autoconf
@@ -93,12 +93,12 @@ Graficzny interfejs u¿ytkownika dla EVMS.
 %setup -q
 %patch0 -p1
 
-%build
-mv aclocal.m4 evms.m4
+head -n 1420 aclocal.m4 > acinclude.m4
 
+%build
 %{__gettextize}
 %{__libtoolize}
-%{__aclocal} -I %{_aclocaldir}/ -I ./
+%{__aclocal}
 %{__autoconf}
 %{__autoheader}
 
