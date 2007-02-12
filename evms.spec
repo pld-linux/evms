@@ -1,5 +1,5 @@
 Summary:	Enterprise Volume Management System utilities
-Summary(pl.UTF-8):   Narzędzia do Enterprise Volume Management System
+Summary(pl.UTF-8):	Narzędzia do Enterprise Volume Management System
 Name:		evms
 Version:	2.5.5
 Release:	1
@@ -39,9 +39,9 @@ EVMS.
 
 %package devel
 Summary:	Header files for EVMS
-Summary(es.UTF-8):   Arquivos de cabeçalho e bibliotecas de desenvolvimento para EVMS
-Summary(pl.UTF-8):   Pliki nagłówkowe dla EVMS
-Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclusão para a EVMS
+Summary(es.UTF-8):	Arquivos de cabeçalho e bibliotecas de desenvolvimento para EVMS
+Summary(pl.UTF-8):	Pliki nagłówkowe dla EVMS
+Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para a EVMS
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -53,9 +53,9 @@ Pliki nagłówkowe dla EVMS.
 
 %package static
 Summary:	Static EVMS library
-Summary(es.UTF-8):   Biblioteca estática usada no desenvolvimento de aplicativos com EVMS
-Summary(pl.UTF-8):   Statyczna biblioteka EVMS
-Summary(pt_BR.UTF-8):   Biblioteca estática de desenvolvimento
+Summary(es.UTF-8):	Biblioteca estática usada no desenvolvimento de aplicativos com EVMS
+Summary(pl.UTF-8):	Statyczna biblioteka EVMS
+Summary(pt_BR.UTF-8):	Biblioteca estática de desenvolvimento
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -67,7 +67,7 @@ Statyczna biblioteka EVMS.
 
 %package ncurses
 Summary:	Ncurses interface for EVMS
-Summary(pl.UTF-8):   Interfejs użytkownika w ncurses dla EVMS
+Summary(pl.UTF-8):	Interfejs użytkownika w ncurses dla EVMS
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 
@@ -79,7 +79,7 @@ Graficzny interfejs użytkownika w ncurses dla EVMS.
 
 %package X11
 Summary:	GUI interface for EVMS
-Summary(pl.UTF-8):   Graficzny interfejs użytkownika dla EVMS
+Summary(pl.UTF-8):	Graficzny interfejs użytkownika dla EVMS
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 
