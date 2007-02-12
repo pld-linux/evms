@@ -1,5 +1,5 @@
 Summary:	Enterprise Volume Management System utilities
-Summary(pl):	Narzêdzia do Enterprise Volume Management System
+Summary(pl.UTF-8):   NarzÄ™dzia do Enterprise Volume Management System
 Name:		evms
 Version:	2.5.5
 Release:	1
@@ -30,64 +30,64 @@ This package contains the user-space tools needed to manage EVMS
 In order to use these user-space tools, you must also have your kernel
 patched with the most recent EVMS code.
 
-%description -l pl
-Ten pakiet zawiera narzêdzia potrzebne do zarz±dzania wolumenami
+%description -l pl.UTF-8
+Ten pakiet zawiera narzÄ™dzia potrzebne do zarzÄ…dzania wolumenami
 dyskowymi EVMS (Enterprise Volume Management System).
 
-Aby u¿ywaæ tych narzêdzi, musisz mieæ j±dro z odpowiednio now± ³at±
+Aby uÅ¼ywaÄ‡ tych narzÄ™dzi, musisz mieÄ‡ jÄ…dro z odpowiednio nowÄ… Å‚atÄ…
 EVMS.
 
 %package devel
 Summary:	Header files for EVMS
-Summary(es):	Arquivos de cabeçalho e bibliotecas de desenvolvimento para EVMS
-Summary(pl):	Pliki nag³ówkowe dla EVMS
-Summary(pt_BR):	Bibliotecas e arquivos de inclusão para a EVMS
+Summary(es.UTF-8):   Arquivos de cabeÃ§alho e bibliotecas de desenvolvimento para EVMS
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe dla EVMS
+Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclusÃ£o para a EVMS
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for EVMS.
 
-%description devel -l pl
-Pliki nag³ówkowe dla EVMS.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe dla EVMS.
 
 %package static
 Summary:	Static EVMS library
-Summary(es):	Biblioteca estática usada no desenvolvimento de aplicativos com EVMS
-Summary(pl):	Statyczna biblioteka EVMS
-Summary(pt_BR):	Biblioteca estática de desenvolvimento
+Summary(es.UTF-8):   Biblioteca estÃ¡tica usada no desenvolvimento de aplicativos com EVMS
+Summary(pl.UTF-8):   Statyczna biblioteka EVMS
+Summary(pt_BR.UTF-8):   Biblioteca estÃ¡tica de desenvolvimento
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static EVMS library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka EVMS.
 
 %package ncurses
 Summary:	Ncurses interface for EVMS
-Summary(pl):	Interfejs u¿ytkownika w ncurses dla EVMS
+Summary(pl.UTF-8):   Interfejs uÅ¼ytkownika w ncurses dla EVMS
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 
 %description ncurses
 Ncurses interface for EVMS.
 
-%description ncurses -l pl
-Graficzny interfejs u¿ytkownika w ncurses dla EVMS.
+%description ncurses -l pl.UTF-8
+Graficzny interfejs uÅ¼ytkownika w ncurses dla EVMS.
 
 %package X11
 Summary:	GUI interface for EVMS
-Summary(pl):	Graficzny interfejs u¿ytkownika dla EVMS
+Summary(pl.UTF-8):   Graficzny interfejs uÅ¼ytkownika dla EVMS
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 
 %description X11
 GUI interface for EVMS.
 
-%description X11 -l pl
-Graficzny interfejs u¿ytkownika dla EVMS.
+%description X11 -l pl.UTF-8
+Graficzny interfejs uÅ¼ytkownika dla EVMS.
 
 %prep
 %setup -q
