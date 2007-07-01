@@ -9,3 +9,14 @@
  
  all: .depend $(TARGET)
  	$(PROCESS_DIRS)
+--- evms-2.5.5/tests/Makefile.in	2005-10-10 17:56:03.000000000 +0200
++++ evms-2.5.5/tests/Makefile.in-new	2007-07-01 19:03:17.169858731 +0200
+@@ -36,7 +36,7 @@
+ 	rm -f Makefile
+ 
+ evms_clean: % : %.o
+-	$(CC) -L$(top_srcdir)/engine $(EVMS_LDFLAGS) $(EVMS_LIBS) $(PTHREAD_LIBS) $(EFENCE_LIBS) -levms -o $@ $@.o
++	$(CC) -L$(top_srcdir)/engine $(EVMS_LDFLAGS) -o $@ $@.o $(EVMS_LIBS) $(PTHREAD_LIBS) $(EFENCE_LIBS) -levms
+ 
+ evms_deactivate seq_dd lvm2_crc: % : %.o
+ 	$(CC) -o $@ $@.o
