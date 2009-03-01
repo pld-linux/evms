@@ -1,0 +1,24 @@
+diff -Nur evms-2.5.5/plugins/swap.org/swapfs.c evms-2.5.5/plugins/swap/swapfs.c
+--- evms-2.5.5/plugins/swap.org/swapfs.c	2005-06-16 16:53:57.000000000 +0000
++++ evms-2.5.5/plugins/swap/swapfs.c	2009-03-01 20:34:36.505962352 +0000
+@@ -27,7 +27,7 @@
+ #include <plugin.h>
+ #include <fcntl.h>
+ #include <sys/wait.h>
+-#include <asm/page.h> /* to get PAGE_SIZE */
++#include <sys/user.h> /* to get PAGE_SIZE */
+ #include <sys/swap.h>
+ 
+ #include "swapfs.h"
+diff -Nur evms-2.5.5/plugins/xfs.org/fsimxfs.h evms-2.5.5/plugins/xfs/fsimxfs.h
+--- evms-2.5.5/plugins/xfs.org/fsimxfs.h	2005-06-16 16:54:04.000000000 +0000
++++ evms-2.5.5/plugins/xfs/fsimxfs.h	2009-03-01 20:34:45.592046002 +0000
+@@ -19,7 +19,7 @@
+  */
+ 
+ #include <uuid/uuid.h>
+-#include <asm/page.h>
++#include <sys/user.h>
+ 
+ extern plugin_record_t xfs_plugin_record;
+ extern plugin_record_t * my_plugin_record;
