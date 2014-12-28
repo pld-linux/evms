@@ -11,7 +11,7 @@ Patch0:		%{name}-link.patch
 Patch1:		%{name}-page_size.patch
 URL:		http://evms.sourceforge.net/
 BuildRequires:	autoconf
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib-devel >= 1.2.0
 BuildRequires:	glibc-static
 BuildRequires:	gtk+-devel >= 1.2.0
